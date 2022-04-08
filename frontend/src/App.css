@@ -2,15 +2,18 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* .container {
+  display: grid;
+  grid-template-columns: 200px 200px;
+} */
+
+#tags{
+  display: inline-block;
+  margin-right: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.checkLabel{
+  display: inline-block;
 }
 
 .App-header {

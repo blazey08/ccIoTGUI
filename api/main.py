@@ -1,6 +1,7 @@
 from asyncore import file_wrapper
 from fileinput import filename
 import os
+from unicodedata import category
 from flask_cors import CORS
 import re
 from flask import Flask, request, jsonify
@@ -11,6 +12,8 @@ app = Flask(__name__)
 CORS(app)
 UPLOAD_FOLDER = os.path.join(os.path.abspath("."),"images")
 
+category = ["male", "female", "beard", "happy"]
+
 @app.route('/')
 def get_current_time():
     return {"title": "CCIOT Application", "home": "here"}
@@ -18,19 +21,26 @@ def get_current_time():
 # Handles file upload
 @app.route('/upload', methods = ["POST"], strict_slashes = False)
 def upload_page():
-    # img = request.files['file']
-    # tags = img.headers
-    # print(tags)
-    # img.save(os.path.join(UPLOAD_FOLDER, img.filename))    
 
-    data = request.form['tag']
+    if request.method == "POST":
+        
+        # Get image
+        image = request.files['file']
+        image.save(os.path.join(UPLOAD_FOLDER, image.filename))    
 
-    print(data)
+        # Get tags
+        tags = request.values.get('tags').split(',')
+        assignedTags = []
+        for c in category:
+            if tags[category.index(c)]:
+                assignedTags.append(c)
 
-    # s3 = boto3.client("s3")
-    # metadata = "topics=['Fire']"
-    # s3.upload_file("images/fire.jpg","cciot-fastgame-proj-ads","fire.jpg")
+        print(assignedTags)
 
-    # response = jsonify({'some': 'data'})
-    # response.headers.add('Access-Control-Allow-Origin', '*')
-    return {"Ack":"Message"}
+        # Uploading to S3
+        # s3 = boto3.client("s3")
+        # metadata = "topics=['Fire']"
+        # s3.upload_file("images/fire.jpg","cciot-fastgame-proj-ads","fire.jpg")
+
+
+    return {"Ack":"Data for {} successfully received".format(image.filename)}
