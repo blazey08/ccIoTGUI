@@ -1,5 +1,3 @@
-from asyncore import file_wrapper
-from fileinput import filename
 import os
 from unicodedata import category
 from flask_cors import CORS
@@ -12,7 +10,7 @@ app = Flask(__name__)
 CORS(app)
 UPLOAD_FOLDER = os.path.join(os.path.abspath("."),"images")
 
-category = ["child","teenager","adult","elderly","male", "female","happy","sad","eyewear","facialhair","smile"]
+category = ["Child","Teenager","Adult","Elderly","Male", "Female","Happy","Sad","Eyewear","Facial Hair","Smile"]
 
 @app.route('/')
 def get_current_time():
@@ -26,21 +24,23 @@ def upload_page():
         
         # Get image
         image = request.files['file']
-        image.save(os.path.join(UPLOAD_FOLDER, image.filename))    
+        image.save(os.path.join(UPLOAD_FOLDER, image.filename))   
+        #print(image.filename) 
 
         # Get tags
         tags = request.values.get('tags').split(',')
         assignedTags = []
         for c in category:
-            if tags[category.index(c)]:
+            if tags[category.index(c)] == 'true':
                 assignedTags.append(c)
 
-        print(assignedTags)
+        metadata = str(assignedTags)[1:-1]
+        metadata = metadata.replace("'","")
+        #print(metadata)
 
         # Uploading to S3
-        # s3 = boto3.client("s3")
-        # metadata = "topics=['Fire']"
-        # s3.upload_file("images/fire.jpg","cciot-fastgame-proj-ads","fire.jpg")
+        s3 = boto3.client("s3")
+        s3.upload_file("images/"+image.filename,"cciot-fastgame-proj-ads",image.filename,ExtraArgs={"Metadata":{"topics":metadata}})
 
 
     return {"Ack":"Data for {} successfully received".format(image.filename)}

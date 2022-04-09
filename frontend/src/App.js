@@ -8,6 +8,11 @@ function App() {
   const[file, setFile] = useState();
   function handleChange(event){
     setFile(event.target.files[0])
+    let imgurl = URL.createObjectURL(event.target.files[0])
+    document.getElementById("imgpreview").setAttribute("src",imgurl)
+    console.log(event.target.files[0].name)
+    document.getElementById("imgname").innerHTML = event.target.files[0].name
+    document.getElementById("uploadedtext").style.display = "none";
   }
 
   // For checkbox
@@ -21,7 +26,7 @@ function App() {
     Happy: false,
     Sad : false,
     Eyewear:false,
-    FacialHair: false,
+    'Facial Hair': false,
     Smile: false
   });
 
@@ -48,6 +53,7 @@ function App() {
     //  Posting to flask
      axios.post('/upload',data, config).then((response) => {
       console.log(response.data);
+      document.getElementById("uploadedtext").style.display = "block";
     });
   }
 
@@ -55,30 +61,45 @@ function App() {
     <div className="App">
           <title>CCIoT GUI</title>
           <form method="POST" onSubmit={handleSubmit} id="help">
-              {/* Image upload */}
-              <h1>File Upload</h1>
-              <input name="image" type="file" onChange={handleChange}/>
-
-              {/* Tags */}
-              <h2>Select the appropriate tags</h2>
-              <div className='container'>
-                {Object.keys(tags).map(key => (
-                  <label htmlFor='tags'>
-                  <input
-                    type="checkbox"
-                    onChange={handleToggle}
-                    key={key}
-                    name= {key}
-                    checked={tags[key]}
-                    id="tags"
-                  />
-                    {key}
-                    <br />
-                    <br />
+            <div id='maindiv'>
+              <div id="leftdiv">
+                {/* Image upload */}
+                <h1>Upload Advertisement</h1>
+                <div id="inputdiv">
+                  <div id='imagewrapper'>
+                    <img id="imgpreview" alt='upload preview' src='emptystate.png'></img>
+                    </div>
+                  <p id="imgname"></p>
+                  <label class="buttons">
+                    <input id="imguploader" name="image" type="file" onChange={handleChange}/>
+                    Choose File
                   </label>
-                ))}
+                </div>
               </div>
-              <button type='submit'>Upload</button>
+              <div id ="tagsdiv">
+                {/* Tags */}
+                <h2>Select Tags</h2>
+                <div className='container'>
+                  {Object.keys(tags).map(key => (
+                    <label className='checkboxeslabel' htmlFor='tags'>
+                    <input
+                      type="checkbox"
+                      onChange={handleToggle}
+                      key={key}
+                      name= {key}
+                      checked={tags[key]}
+                      id="tags"
+                    />
+                      {key}
+                      <br />
+                      <br />
+                    </label>
+                  ))}
+                </div>
+                <button className='buttons' id='uploadbutton' type='submit'>Upload</button>
+                <p id="uploadedtext">Your File Has Been Uploaded!</p>
+              </div>
+            </div>
           </form>
     </div>
   );

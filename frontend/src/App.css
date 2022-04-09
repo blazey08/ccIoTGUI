@@ -4,13 +4,15 @@
 
 .container {
   display: grid;
-  grid-template-columns: 200px 200px;
-  align-items: center;
+  grid-template-columns: 20% 20% 20% 20%;
+  justify-content: space-evenly;
+  justify-items: start;
 }
 
 #tags{
   display: inline-block;
   margin-right: 10px;
+  
 }
 
 .checkLabel{
@@ -39,4 +41,69 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#imgpreview{
+  max-height: 70vh;
+  max-width: 70vh;
+}
+
+#imagewrapper{
+  height: 70vh;
+  width:70vh;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+#inputdiv{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+
+#tagsdiv{
+  width: -webkit-fill-available;
+}
+
+.checkboxeslabel{
+  padding-left: 10%;
+  padding-top: 20%;
+  display:flex;
+}
+
+.buttons{
+  background-color: #6435C1;
+  color: white;
+  border-radius: 15px;
+  padding: 10px 20px;
+  border: none;
+  font-size: 1rem;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+#maindiv{
+  display: flex;
+  height: 100vh;
+}
+
+#leftdiv{
+  width : 50%;
+}
+
+input[type="checkbox"]{
+  width: 20px;
+  height: 20px
+}
+
+#uploadbutton{
+  margin-top: 10%;
+}
+
+#uploadedtext{
+  display: none;
 }
