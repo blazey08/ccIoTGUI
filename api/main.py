@@ -12,7 +12,7 @@ app = Flask(__name__)
 CORS(app)
 UPLOAD_FOLDER = os.path.join(os.path.abspath("."),"images")
 
-category = ["male", "female", "beard", "happy"]
+category = ["child","teenager","adult","elderly","male", "female","happy","sad","eyewear","facialhair","smile"]
 
 @app.route('/')
 def get_current_time():

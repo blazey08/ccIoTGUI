@@ -12,10 +12,17 @@ function App() {
 
   // For checkbox
   const [tags, setTags] = React.useState({
+    Child: false,
+    Teenager: false,
+    Adult: false,
+    Elderly: false,
     Male: false,
     Female: false,
-    Beard: false,
     Happy: false,
+    Sad : false,
+    Eyewear:false,
+    FacialHair: false,
+    Smile: false
   });
 
   const handleToggle = ({ target }) =>
@@ -58,7 +65,6 @@ function App() {
                 {Object.keys(tags).map(key => (
                   <label htmlFor='tags'>
                   <input
-
                     type="checkbox"
                     onChange={handleToggle}
                     key={key}

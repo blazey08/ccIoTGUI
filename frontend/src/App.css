@@ -2,10 +2,11 @@
   text-align: center;
 }
 
-/* .container {
+.container {
   display: grid;
   grid-template-columns: 200px 200px;
-} */
+  align-items: center;
+}
 
 #tags{
   display: inline-block;
