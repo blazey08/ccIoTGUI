@@ -16,6 +16,15 @@ function clickNav(e){
   }
 }
 
+function homeClick(e){
+  if(e.target.id==="bigupload"){
+    document.getElementById("uploadnavbutton").click();
+  }
+  if(e.target.id==="bigmetrics"){
+    document.getElementById("metricsbutton").click();
+  }
+}
+
 function App() {
   return(
     <div className="App">
@@ -27,7 +36,7 @@ function App() {
           <Link id="metricsbutton" className='navbutton' to="/metrics" onClick={clickNav}>Metrics</Link>
         </div>
         <Routes>
-          <Route exact path="/" element={<Login/>}>
+          <Route exact path="/" element={<Login pressbtn={homeClick}/>}>
           </Route>
           <Route path="/upload" element={<Upload/>}>
           </Route>

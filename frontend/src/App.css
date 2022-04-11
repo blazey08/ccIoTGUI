@@ -138,4 +138,31 @@ input[type="checkbox"]{
   margin-right:3%;
 }
 
+#hometext{
+  font-size:5rem;
+}
 
+#what{
+  color:grey;
+}
+
+.bigbtn{
+  background-color: #6435C1;
+  color:white;
+  border-radius: 15px;
+  padding: 10px 20px;
+  border: none;
+  margin: 20px;
+  align-items: center;
+  display: flex;
+  font-size: 1rem;
+}
+
+.svgicon{
+  margin-right: 10px;
+}
+
+#bigbtnsdiv{
+  display: flex;
+  justify-content: center;
+}

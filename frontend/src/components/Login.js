@@ -1,27 +1,22 @@
 import '../App.css';
-import axios from "axios";
 import React from 'react';
 
-function handleButton(e){
-    e.preventDefault();
-
-    const data = new FormData()
-    data.append('bType', e.target.id)
-
-    axios.post('/', {'bType': e.target.id}).then((response) => {
-        console.log(response.data);
-      });
-
-}    
-
-function Login(){
-
+function Login(props){
     return(
         <div>
-            <header>Main Page</header>
             <title>Main Page</title>
-            <button id="metrics" onClick={handleButton}>Metrics</button>
-            <button id="upload" onClick={handleButton}>Upload Image</button> 
+            <h1 id="hometext">Welcome, Amy</h1>
+            <h2 id="what">What would you like to do today?</h2>
+            <div id='bigbtnsdiv'>
+                <button id="bigupload" className='bigbtn' onClick={props.pressbtn}>
+                    <img className='svgicon' src='cloud_upload_black_24dp.svg' alt=""/>
+                    Upload Ads
+                </button>
+                <button id="bigmetrics" className='bigbtn' onClick={props.pressbtn}>
+                    <img className='svgicon' src='insights_black_24dp.svg' alt=""/>
+                    View Metrics
+                </button>
+            </div>
         </div>
 
     )
