@@ -115,6 +115,7 @@ input[type="checkbox"]{
   background-color: #6435C1;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .navbutton{
@@ -130,13 +131,11 @@ input[type="checkbox"]{
 .activenavbutton{
   color:#6435C1;
   background-color: white;
+  font-weight: 500;
 }
 
-#homebutton{
-  margin-left:3%;
-}
-
-#uploadnavbutton{
-  float:right;
+#metricsbutton{
   margin-right:3%;
 }
+
+

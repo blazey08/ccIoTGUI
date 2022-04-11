@@ -34,8 +34,6 @@ function Upload() {
   const handleToggle = ({ target }) =>
     setTags(s => ({ ...s, [target.name]: !s[target.name] }));
 
-  
-
   function handleSubmit(event){
     event.preventDefault();
     
