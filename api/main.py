@@ -1,8 +1,9 @@
+from difflib import restore
 import os
 from unicodedata import category
 from flask_cors import CORS
 import re
-from flask import Flask, request, jsonify
+from flask import Flask, redirect, request, jsonify, url_for
 import boto3
 import json
 
@@ -10,11 +11,23 @@ app = Flask(__name__)
 CORS(app)
 UPLOAD_FOLDER = os.path.join(os.path.abspath("."),"images")
 
-category = ["Child","Teenager","Adult","Elderly","Male", "Female","Happy","Sad","Eyewear","Facial Hair","Smile"]
+category = ["Child","Teenager","Adult","Elderly","Male", "Female","Happy","Sad","Eyeglasses","Sunglasses","Facial Hair","Smile"]
 
-@app.route('/')
-def get_current_time():
-    return {"title": "CCIOT Application", "home": "here"}
+@app.route('/', methods = ["POST"])
+def login():
+
+    if request.method == "POST":
+        resType = request.get_json(silent=True).get('bType')
+
+        if resType == "metrics":
+            print("Going to metrics page...")
+            return redirect(url_for('display_metrics'))
+
+        elif resType == "upload":
+            print("Going to upload page...")
+            return redirect(url_for("upload_page"))
+
+    return {"title": "CCIOT Application"}
 
 # Handles file upload
 @app.route('/upload', methods = ["POST"], strict_slashes = False)
@@ -44,3 +57,7 @@ def upload_page():
 
 
     return {"Ack":"Data for {} successfully received".format(image.filename)}
+
+@app.route('/metrics')
+def display_metrics():
+    print("Display page")
