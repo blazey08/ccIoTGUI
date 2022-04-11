@@ -60,4 +60,6 @@ def upload_page():
 
 @app.route('/metrics')
 def display_metrics():
+    s3 = boto3.client("s3")
+    s3.download_file()
     print("Display page")
