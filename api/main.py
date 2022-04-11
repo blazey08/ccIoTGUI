@@ -1,11 +1,10 @@
 from difflib import restore
-import os
+import os, re, boto3, json
+from boto3.dynamodb.conditions import Key
 from unicodedata import category
 from flask_cors import CORS
-import re
 from flask import Flask, redirect, request, jsonify, url_for
-import boto3
-import json
+
 
 app = Flask(__name__)
 CORS(app)
@@ -58,8 +57,14 @@ def upload_page():
 
     return {"Ack":"Data for {} successfully received".format(image.filename)}
 
-@app.route('/metrics')
+@app.route('/metrics', methods = ["GET"])
 def display_metrics():
-    s3 = boto3.client("s3")
-    s3.download_file()
-    print("Display page")
+
+    if request.method == "GET":
+        dynamodb = boto3.resource('dynamodb')
+        table = dynamodb.Table('viewerCount_byAds')
+        response = table.scan()['Items']
+    
+        return {"data": response}
+
+    return "Hello world"

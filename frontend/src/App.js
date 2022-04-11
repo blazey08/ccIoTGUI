@@ -1,6 +1,7 @@
 import './App.css';
 import Login from './components/Login';
 import Upload from './components/Upload';
+import Metrics from './components/Metrics';
 import React from 'react';
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
 
@@ -19,7 +20,7 @@ function App() {
           </Route>
           <Route path="/upload" element={<Upload/>}>
           </Route>
-          <Route path="/metrics" element={<Upload/>}>
+          <Route path="/metrics" element={<Metrics/>}>
           </Route>
         </Routes>
       </BrowserRouter>
