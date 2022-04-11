@@ -11,7 +11,7 @@ app = Flask(__name__)
 CORS(app)
 UPLOAD_FOLDER = os.path.join(os.path.abspath("."),"images")
 
-category = ["Child","Teenager","Adult","Elderly","Male", "Female","Happy","Sad","Eyeglasses","Sunglasses","Facial Hair","Smile"]
+category = ["Child","Teenager","Adult","Elderly","Male", "Female","Happy","Sad","Eyeglasses","Sunglasses","FacialHair","Smile"]
 
 @app.route('/', methods = ["POST"])
 def login():
