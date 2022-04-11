@@ -167,3 +167,12 @@ input[type="checkbox"]{
   display: flex;
   justify-content: center;
 }
+
+table{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+th{
+  padding: 15px;
+}
